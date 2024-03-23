@@ -4,7 +4,7 @@
 
 class Root : public Tree {
 public:
-    Root(Tree*, std::string = "standard");
+    Root(Tree* tree, std::string name = "root");
     void buildTree();
     int startApp();
 };

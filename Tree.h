@@ -9,12 +9,12 @@ private:
     Tree* head;
     std::vector<Tree*> branch;
 public:
-    Tree(Tree*, std::string = "standard");
+    Tree(Tree* tree, std::string name = "default");
     ~Tree();
-    bool rename(std::string);
+    bool rename(std::string name);
     std::string getName();
     Tree* getHead();
-    Tree* getSubject(std::string);
+    Tree* getSubject(std::string name);
     void printBranches();
 };
 

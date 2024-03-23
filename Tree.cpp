@@ -9,11 +9,10 @@ Tree::Tree(Tree* head, std::string name){
 
 
 Tree::~Tree(){
-    for (int i = 0; i < branch.size(); i++) {
+    for (int i = 0; i < branch.size(); i++){
         delete branch[i];
     }
 }
-
 
 bool Tree::rename(std::string name){
     if (head && head -> getSubject(name)) {
@@ -22,7 +21,6 @@ bool Tree::rename(std::string name){
     this -> name = name;
     return true;
 }
-
 
 void Tree::printBranches(){
     if (!branch.empty()) {
@@ -34,11 +32,9 @@ void Tree::printBranches(){
     }
 }
 
-
 Tree* Tree::getHead(){
     return head;
 }
-
 
 Tree* Tree::getSubject(std::string name){
     for (int i = 0; i < branch.size(); i++){
@@ -47,7 +43,6 @@ Tree* Tree::getSubject(std::string name){
     }
     return nullptr;
 }
-
 
 std::string Tree::getName(){
     return name;
