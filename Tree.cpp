@@ -47,3 +47,35 @@ Tree* Tree::getSubject(std::string name){
 std::string Tree::getName(){
     return name;
 }
+
+Tree* Tree::getSubjectOnBranch(std::string name){
+
+}
+
+Tree* Tree::getSubjectOnTree(std::string name){
+
+}
+
+void Tree::printHierarchy(int level){
+    for (int i = 0; i < level; i++) std::cout << "\t";
+    std::cout << name << std::endl;
+    level++;
+    for (int i = 0; i < branch.size(); i++) {
+        branch[i] -> printHierarchy(level);
+    }
+}
+
+void Tree::printReadiness(int level){
+    for (int i = 0; i < level; i++) std::cout << "\t";
+    std::cout << name;
+    if (readiness) std::cout << " is ready";
+    else std::cout << " is not ready";
+    level++;
+    for (int i = 0; i < branch.size(); i++) {
+        branch[i] -> printReadiness(level);
+    }
+}
+
+void Tree::setReadiness(int status){
+    readiness = status!=0;
+}

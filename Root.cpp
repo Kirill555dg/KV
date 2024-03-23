@@ -30,7 +30,6 @@ void Root::buildTree(){
 }
 
 int Root::startApp() {
-    std::cout << this -> getName();
-    this -> printBranches();
+    this -> printHierarchy(0);
     return 0;
 }
