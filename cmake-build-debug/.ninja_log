@@ -1,0 +1,9 @@
+# ninja log v5
+5	200	7322317258075677	CMakeFiles/KV1.dir/main.cpp.obj	36d08b218d254689
+252	319	7322389745596113	KV1.exe	ba360f03cadca58b
+2	252	7322389744953912	CMakeFiles/KV1.dir/Root.cpp.obj	6b8dfcef4ed4a73a
+2	281	7322317258888491	CMakeFiles/KV1.dir/Tree.cpp.obj	d5bc19c1b1879a0e
+5	206	7328896661914392	CMakeFiles/KV1.dir/main.cpp.obj	744b53f00b5e0ecd
+6	262	7328896662476337	CMakeFiles/KV1.dir/Root.cpp.obj	85e02d0edd56d2c9
+2	289	7328896662737237	CMakeFiles/KV1.dir/Tree.cpp.obj	e8c981c7d07d1f7d
+289	365	7328896663489846	KV1.exe	ba360f03cadca58b
