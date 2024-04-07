@@ -67,8 +67,32 @@ build CMakeFiles/KV1.dir/Root.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Use
   OBJECT_DIR = CMakeFiles\KV1.dir
   OBJECT_FILE_DIR = CMakeFiles\KV1.dir
 
-build CMakeFiles/KV1.dir/Twig.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Twig.cpp || cmake_object_order_depends_target_KV1
-  DEP_FILE = CMakeFiles\KV1.dir\Twig.cpp.obj.d
+build CMakeFiles/KV1.dir/Subj_2.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Subj_2.cpp || cmake_object_order_depends_target_KV1
+  DEP_FILE = CMakeFiles\KV1.dir\Subj_2.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\KV1.dir
+  OBJECT_FILE_DIR = CMakeFiles\KV1.dir
+
+build CMakeFiles/KV1.dir/Subj_3.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Subj_3.cpp || cmake_object_order_depends_target_KV1
+  DEP_FILE = CMakeFiles\KV1.dir\Subj_3.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\KV1.dir
+  OBJECT_FILE_DIR = CMakeFiles\KV1.dir
+
+build CMakeFiles/KV1.dir/Subj_4.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Subj_4.cpp || cmake_object_order_depends_target_KV1
+  DEP_FILE = CMakeFiles\KV1.dir\Subj_4.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\KV1.dir
+  OBJECT_FILE_DIR = CMakeFiles\KV1.dir
+
+build CMakeFiles/KV1.dir/Subj_5.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Subj_5.cpp || cmake_object_order_depends_target_KV1
+  DEP_FILE = CMakeFiles\KV1.dir\Subj_5.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\KV1.dir
+  OBJECT_FILE_DIR = CMakeFiles\KV1.dir
+
+build CMakeFiles/KV1.dir/Subj_6.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Subj_6.cpp || cmake_object_order_depends_target_KV1
+  DEP_FILE = CMakeFiles\KV1.dir\Subj_6.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\KV1.dir
   OBJECT_FILE_DIR = CMakeFiles\KV1.dir
@@ -81,7 +105,7 @@ build CMakeFiles/KV1.dir/Twig.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Use
 #############################################
 # Link the executable KV1.exe
 
-build KV1.exe: CXX_EXECUTABLE_LINKER__KV1_Debug CMakeFiles/KV1.dir/main.cpp.obj CMakeFiles/KV1.dir/Tree.cpp.obj CMakeFiles/KV1.dir/Root.cpp.obj CMakeFiles/KV1.dir/Twig.cpp.obj
+build KV1.exe: CXX_EXECUTABLE_LINKER__KV1_Debug CMakeFiles/KV1.dir/main.cpp.obj CMakeFiles/KV1.dir/Tree.cpp.obj CMakeFiles/KV1.dir/Root.cpp.obj CMakeFiles/KV1.dir/Subj_2.cpp.obj CMakeFiles/KV1.dir/Subj_3.cpp.obj CMakeFiles/KV1.dir/Subj_4.cpp.obj CMakeFiles/KV1.dir/Subj_5.cpp.obj CMakeFiles/KV1.dir/Subj_6.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\KV1.dir

@@ -8,7 +8,8 @@ private:
     std::string name;
     Tree* head;
     std::vector<Tree*> branch;
-    bool readiness;
+    // Новое поле
+    int readiness = 0;
 public:
     Tree(Tree* tree, std::string name = "default");
     ~Tree();
@@ -16,14 +17,21 @@ public:
     std::string getName();
     Tree* getHead();
     Tree* getSubject(std::string name);
-    void printBranches();
-    // Новые методы
-    Tree* getSubjectOnBranch(std::string name);
-    Tree* getSubjectOnTree(std::string name);
-    void printHierarchy(int level);
-    void printReadiness(int level);
+    //void printBranches(); - устаревший метод
+    // Новые методы в КВ2
+    void printHierarchy();
+    void printReadiness();
+    Tree* getObjectOnBranch(std::string name);
+    Tree* getObjectOnTree(std::string name);
     void setReadiness(int status);
-    bool isReady();
+
+    // Новые методы в КВ3
+    bool changeHead(Tree* newHead);
+    void deleteSubject(std::string name);
+    Tree* getObject(std::string path);
+
+    //УНИКАЛЬНОСТЬ
+    int countOfObjects(std::string name);
 };
 
 #endif

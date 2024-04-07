@@ -8,5 +8,14 @@ add_executable(KV1 main.cpp
         Tree.h
         Root.cpp
         Root.h
-        Twig.cpp
-        Twig.h)
+        Subj_2.cpp
+        Subj_2.h
+        Subj_3.cpp
+        Subj_3.h
+        Subj_4.cpp
+        Subj_4.h
+        Subj_5.cpp
+        Subj_5.h
+        Subj_6.cpp
+        Subj_6.h
+)
