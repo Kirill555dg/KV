@@ -61,38 +61,44 @@ build CMakeFiles/KV1.dir/Tree.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Use
   OBJECT_DIR = CMakeFiles\KV1.dir
   OBJECT_FILE_DIR = CMakeFiles\KV1.dir
 
-build CMakeFiles/KV1.dir/Root.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Root.cpp || cmake_object_order_depends_target_KV1
-  DEP_FILE = CMakeFiles\KV1.dir\Root.cpp.obj.d
+build CMakeFiles/KV1.dir/ControlPanel.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/ControlPanel.cpp || cmake_object_order_depends_target_KV1
+  DEP_FILE = CMakeFiles\KV1.dir\ControlPanel.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\KV1.dir
   OBJECT_FILE_DIR = CMakeFiles\KV1.dir
 
-build CMakeFiles/KV1.dir/Subj_2.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Subj_2.cpp || cmake_object_order_depends_target_KV1
-  DEP_FILE = CMakeFiles\KV1.dir\Subj_2.cpp.obj.d
+build CMakeFiles/KV1.dir/Floor.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Floor.cpp || cmake_object_order_depends_target_KV1
+  DEP_FILE = CMakeFiles\KV1.dir\Floor.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\KV1.dir
   OBJECT_FILE_DIR = CMakeFiles\KV1.dir
 
-build CMakeFiles/KV1.dir/Subj_3.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Subj_3.cpp || cmake_object_order_depends_target_KV1
-  DEP_FILE = CMakeFiles\KV1.dir\Subj_3.cpp.obj.d
+build CMakeFiles/KV1.dir/InputObject.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/InputObject.cpp || cmake_object_order_depends_target_KV1
+  DEP_FILE = CMakeFiles\KV1.dir\InputObject.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\KV1.dir
   OBJECT_FILE_DIR = CMakeFiles\KV1.dir
 
-build CMakeFiles/KV1.dir/Subj_4.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Subj_4.cpp || cmake_object_order_depends_target_KV1
-  DEP_FILE = CMakeFiles\KV1.dir\Subj_4.cpp.obj.d
+build CMakeFiles/KV1.dir/Lift.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Lift.cpp || cmake_object_order_depends_target_KV1
+  DEP_FILE = CMakeFiles\KV1.dir\Lift.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\KV1.dir
   OBJECT_FILE_DIR = CMakeFiles\KV1.dir
 
-build CMakeFiles/KV1.dir/Subj_5.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Subj_5.cpp || cmake_object_order_depends_target_KV1
-  DEP_FILE = CMakeFiles\KV1.dir\Subj_5.cpp.obj.d
+build CMakeFiles/KV1.dir/OutputObject.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/OutputObject.cpp || cmake_object_order_depends_target_KV1
+  DEP_FILE = CMakeFiles\KV1.dir\OutputObject.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\KV1.dir
   OBJECT_FILE_DIR = CMakeFiles\KV1.dir
 
-build CMakeFiles/KV1.dir/Subj_6.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Subj_6.cpp || cmake_object_order_depends_target_KV1
-  DEP_FILE = CMakeFiles\KV1.dir\Subj_6.cpp.obj.d
+build CMakeFiles/KV1.dir/Passenger.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/Passenger.cpp || cmake_object_order_depends_target_KV1
+  DEP_FILE = CMakeFiles\KV1.dir\Passenger.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\KV1.dir
+  OBJECT_FILE_DIR = CMakeFiles\KV1.dir
+
+build CMakeFiles/KV1.dir/System.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/Users/Kiril/CLionProjects/KV/System.cpp || cmake_object_order_depends_target_KV1
+  DEP_FILE = CMakeFiles\KV1.dir\System.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\KV1.dir
   OBJECT_FILE_DIR = CMakeFiles\KV1.dir
@@ -105,7 +111,7 @@ build CMakeFiles/KV1.dir/Subj_6.cpp.obj: CXX_COMPILER__KV1_unscanned_Debug C$:/U
 #############################################
 # Link the executable KV1.exe
 
-build KV1.exe: CXX_EXECUTABLE_LINKER__KV1_Debug CMakeFiles/KV1.dir/main.cpp.obj CMakeFiles/KV1.dir/Tree.cpp.obj CMakeFiles/KV1.dir/Root.cpp.obj CMakeFiles/KV1.dir/Subj_2.cpp.obj CMakeFiles/KV1.dir/Subj_3.cpp.obj CMakeFiles/KV1.dir/Subj_4.cpp.obj CMakeFiles/KV1.dir/Subj_5.cpp.obj CMakeFiles/KV1.dir/Subj_6.cpp.obj
+build KV1.exe: CXX_EXECUTABLE_LINKER__KV1_Debug CMakeFiles/KV1.dir/main.cpp.obj CMakeFiles/KV1.dir/Tree.cpp.obj CMakeFiles/KV1.dir/ControlPanel.cpp.obj CMakeFiles/KV1.dir/Floor.cpp.obj CMakeFiles/KV1.dir/InputObject.cpp.obj CMakeFiles/KV1.dir/Lift.cpp.obj CMakeFiles/KV1.dir/OutputObject.cpp.obj CMakeFiles/KV1.dir/Passenger.cpp.obj CMakeFiles/KV1.dir/System.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\KV1.dir

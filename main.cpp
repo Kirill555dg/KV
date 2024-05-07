@@ -1,8 +1,8 @@
-#include "Root.h"
+#include "System.h"
 
 int main()
 {
-    Root root (nullptr);
-    root.buildTree();
-    return root.startApp();
+    System system (nullptr);
+    system.build_tree_objects();
+    return system.exec_app();
 }

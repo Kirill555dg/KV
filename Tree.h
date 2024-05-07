@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <sstream>
 
 class Tree{
 public:
@@ -27,19 +28,19 @@ public:
     Tree* getObjectByPath(std::string path);
 
     // Новые методы в КВ4
-    typedef void (Tree:: *Signal) (std::string&); //Указатель на метод сигнала
-    typedef void (Tree:: *Handler) (std::string); //Указатель на метод обработчика
+    typedef void (Tree::* Signal) (std::string&); //Указатель на метод сигнала
+    typedef void (Tree::* Handler) (std::string); //Указатель на метод обработчика
 
     void connect(Signal signal, Tree* target, Handler handler);
     void disconnect(Signal signal, Tree* target, Handler handler);
     void emitSignal(Signal signal, std::string& message);
     std::string getAbsolutePath();
     void setReadinessOnBranch(int status);
+protected:
+    std::vector<Tree*> branch;
 private:
     std::string name;
     Tree* head;
-    std::vector<Tree*> branch;
-    // Новое поле
     int readiness = 0;
     struct Connection{
         Signal signal;

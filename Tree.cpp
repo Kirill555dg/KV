@@ -8,11 +8,12 @@ Tree::Connection::Connection(Signal signal, Tree* target, Handler handler){
     this->handler = handler;
 };
 
-Tree::Tree(Tree* head, std::string name, int num) : num(num) {
+Tree::Tree(Tree* head, std::string name, int num): num(num) {
     this -> head = head;
     this -> name = name;
     if ( head ) head -> branch.push_back( this );
 }
+
 
 Tree::~Tree(){
     for (int i = 0; i < branch.size(); i++){
@@ -131,6 +132,7 @@ void Tree::setReadiness(int status){
 
 void Tree::setReadinessOnBranch(int status){
     setReadiness(status);
+    if (status == 0) return;
     for (int i = 0; i < branch.size(); i++){
         branch[i] -> setReadinessOnBranch(status);
     }
@@ -243,7 +245,7 @@ void Tree::emitSignal(Signal signal, std::string& message){
     (this ->* signal) (message);
 
     for (int i = 0; i < connections.size(); i++){
-        if (connections[i]->signal == signal){
+        if (connections[i]->signal == signal) {
             handler = connections[i]->handler;
             target = connections[i]->target;
             if (target->readiness != 0){
@@ -254,7 +256,7 @@ void Tree::emitSignal(Signal signal, std::string& message){
 }
 
 std::string Tree::getAbsolutePath(){
-    Tree* curHead = this->getHead();
+    Tree* curHead = getHead();
     if (!curHead) {
         return "/";
     }
