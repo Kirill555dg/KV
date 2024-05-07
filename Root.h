@@ -7,6 +7,9 @@ public:
     Root(Tree* tree, std::string name = "root");
     void buildTree();
     int startApp();
+
+    void signalRun(std::string& message);
+    void handlerRun(std::string message);
 };
 
 #endif

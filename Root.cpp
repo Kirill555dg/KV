@@ -4,10 +4,18 @@
 #include "Subj_4.h"
 #include "Subj_5.h"
 #include "Subj_6.h"
-#include <iostream>
 
 
-Root::Root(Tree* head, std::string name) : Tree(head, name) {}
+Root::Root(Tree* head, std::string name) : Tree(head, name, 1) {}
+
+void Root::signalRun(std::string& message){
+    std::cout << "Signal from " << getAbsolutePath() << std::endl;
+    message += " (class: 1)";
+}
+
+void Root::handlerRun(std::string message){
+    std::cout << "Signal to " << getAbsolutePath() << " Text: " + message << std::endl;
+}
 
 void Root::buildTree(){
     int number;
@@ -17,35 +25,58 @@ void Root::buildTree(){
     Tree* head = this;
     while (std::cin >> headPath && headPath != "endtree") {
         std::cin >> subjName >> number;
-        head = head -> getObject(headPath);
+        head = head -> getObjectByPath(headPath);
         if (!head) {
             std::cout << "Object tree\n";
             printHierarchy();
-            std::cout << "The head object " << headPath << " is not found";
+            std::cout << "The head object " << headPath << " is not found\n";
             exit(1);
         }
         if (head -> getSubject(subjName)) {
-            std::cout << headPath << "     Dubbing the names of subordinate objects";
+            std::cout << headPath << "     Dubbing the names of subordinate objects\n";
         } else {
-            switch (number) {
-                case 2:
-                    new Subj_2(head, subjName);
-                    break;
-                case 3:
-                    new Subj_3(head, subjName);
-                    break;
-                case 4:
-                    new Subj_4(head, subjName);
-                    break;
-                case 5:
-                    new Subj_5(head, subjName);
-                    break;
-                case 6:
-                    new Subj_6(head, subjName);
-                    break;
-                default:
-                    break;
+            if (number == 2) {
+                new Subj_2(head, subjName);
+            } else if (number == 3) {
+                new Subj_3(head, subjName);
+            }else if (number == 4) {
+                new Subj_4(head, subjName);
+            }else if (number == 5) {
+                new Subj_5(head, subjName);
+            }else if (number == 6) {
+                new Subj_6(head, subjName);
             }
+        }
+    }
+
+    std::string emitterPath, targetPath;
+
+    Signal signals[]
+            {
+                    SIGNAL(Root::signalRun),
+                    SIGNAL(Subj_2::signalRun),
+                    SIGNAL(Subj_3::signalRun),
+                    SIGNAL(Subj_4::signalRun),
+                    SIGNAL(Subj_5::signalRun),
+                    SIGNAL(Subj_6::signalRun)
+            };
+
+    Handler handlers[]
+            {
+                    HANDLER(Root::handlerRun),
+                    HANDLER(Subj_2::handlerRun),
+                    HANDLER(Subj_3::handlerRun),
+                    HANDLER(Subj_4::handlerRun),
+                    HANDLER(Subj_5::handlerRun),
+                    HANDLER(Subj_6::handlerRun)
+            };
+
+    while (std::cin >> emitterPath && emitterPath != "end_of_connections"){
+        std::cin >> targetPath;
+        Tree* emitter = getObjectByPath(emitterPath);
+        Tree* target = getObjectByPath(targetPath);
+        if (emitter && target){
+            emitter->connect(signals[emitter->num-1], target, handlers[target->num-1]);
         }
     }
 }
@@ -53,53 +84,60 @@ void Root::buildTree(){
 int Root::startApp() {
     std::cout << "Object tree\n";
     printHierarchy();
-    std::string command, target, path = "/";
-    Tree* object = this;
+    setReadinessOnBranch(1);
+
+    std::string command, pathTarget, pathObject, message;
+    int status;
+
+    Signal signals[]
+            {
+                    SIGNAL(Root::signalRun),
+                    SIGNAL(Subj_2::signalRun),
+                    SIGNAL(Subj_3::signalRun),
+                    SIGNAL(Subj_4::signalRun),
+                    SIGNAL(Subj_5::signalRun),
+                    SIGNAL(Subj_6::signalRun)
+            };
+
+    Handler handlers[]
+            {
+                    HANDLER(Root::handlerRun),
+                    HANDLER(Subj_2::handlerRun),
+                    HANDLER(Subj_3::handlerRun),
+                    HANDLER(Subj_4::handlerRun),
+                    HANDLER(Subj_5::handlerRun),
+                    HANDLER(Subj_6::handlerRun)
+            };
+
     while (std::cin >> command && command != "END") {
-        if (command == "SET") {
-            std::cin >> path;
-            Tree* newObject = object -> getObject(path);
-            if (newObject) {
-                object = newObject;
-                std::cout << "Object is set: " << object->getName() << std::endl;
-            } else {
-                std::cout << "The object was not found at the specified coordinate: " << path << std::endl;
+        if (command == "EMIT") {
+            std::cin >> pathObject;
+            std::getline(std::cin, message);
+            Tree* object = getObjectByPath(pathObject);
+            if (object){
+                object -> emitSignal(signals[object->num-1], message);
             }
-        } else if (command == "FIND") {
-            std::cin >> path;
-            Tree* subject = object -> getObject(path);
-            if (subject) {
-                std::cout << path << "     Object name: " << subject -> getName() << std::endl;
-            } else {
-                std::cout << path << "     Object is not found\n";
+        } else if (command == "SET_CONNECT") {
+            std::cin >> pathObject >> pathTarget;
+            Tree* object = getObjectByPath(pathObject);
+            Tree* target = getObjectByPath(pathTarget);
+            if (object && target) {
+                object -> connect(signals[object->num-1], target, handlers[target->num-1]);
             }
-        } else if (command == "MOVE") {
-            std::cin >> path;
-            Tree* newHead = object -> getObject(path);
-            if (!newHead) {
-                std::cout << path << "     Head object is not found\n";
-            } else if (newHead -> getSubject(object -> getName())) {
-                std::cout << path << "     Dubbing the names of subordinate objects\n";
-            } else if (!object -> changeHead(newHead)) {
-                std::cout << path << "     Redefining the head object failed\n";
-            } else {
-                std::cout << "New head object: " << newHead -> getName() << std::endl;
+        } else if (command == "DELETE_CONNECT") {
+            std::cin >> pathObject >> pathTarget;
+            Tree* object = getObjectByPath(pathObject);
+            Tree* target = getObjectByPath(pathTarget);
+            if (object && target) {
+                object -> disconnect(signals[object->num-1], target, handlers[target->num-1]);
             }
-        } else if (command == "DELETE") {
-            std::cin >> target;
-            Tree* subject = object -> getSubject(target);
-            if (subject) {
-                std::string absolutePath = '/' + subject -> getName();
-                while (subject -> getHead() != this) {
-                    subject = subject -> getHead();
-                    absolutePath = '/' + subject -> getName() + absolutePath;
-                }
-                object -> deleteSubject(target);
-                std::cout << "The object " << absolutePath << " has been deleted" << std::endl;
+        } else if (command == "SET_CONDITION") {
+            std::cin >> pathObject >> status;
+            Tree* object = getObjectByPath(pathObject);
+            if (object){
+                object -> setReadiness(status);
             }
         }
     }
-    std::cout << "Current object hierarchy tree\n";
-    printHierarchy();
     return 0;
 }

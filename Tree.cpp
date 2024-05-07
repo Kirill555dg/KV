@@ -1,12 +1,18 @@
 #include "Tree.h"
 #include <iostream>
+#include <functional>
 
-Tree::Tree(Tree* head, std::string name){
+Tree::Connection::Connection(Signal signal, Tree* target, Handler handler){
+    this->signal = signal;
+    this->target = target;
+    this->handler = handler;
+};
+
+Tree::Tree(Tree* head, std::string name, int num) : num(num) {
     this -> head = head;
     this -> name = name;
     if ( head ) head -> branch.push_back( this );
 }
-
 
 Tree::~Tree(){
     for (int i = 0; i < branch.size(); i++){
@@ -48,17 +54,16 @@ std::string Tree::getName(){
     return name;
 }
 
-int Tree::countOfObjects(std::string name){
-    int count = 0;
-    if (getName() == name) count++;
-    for (int i = 0; i < branch.size(); i++) {
-        count += branch[i] -> countOfObjects(name);
-    }
-    return count;
-}
-
 Tree* Tree::getObjectOnBranch(std::string name){
-    if (countOfObjects(name) != 1) return nullptr;
+    std::function<int(std::string name, Tree* obj)> count = [&count](std::string name, Tree* obj){
+        int cou = 0;
+        if (obj -> getName() == name) cou++;
+        for (int i = 0; i < obj -> branch.size(); i++) {
+            cou += count(name, obj -> branch[i]);
+        }
+        return cou;
+    };
+    if (count(name, this) != 1) return nullptr;
     if (getName() == name) {
         return this;
     } else {
@@ -116,15 +121,18 @@ void Tree::setReadiness(int status){
             branch[i] -> setReadiness(0);
         }
     } else {
-        Tree* root = getHead();
-        while (root) {
-            if (root -> readiness == 0) {
-                readiness = 0;
-                return;
-            }
-            root = root -> getHead();
+        if (getHead() && getHead() -> readiness == 0) {
+            readiness = 0;
+        } else {
+            readiness = status;
         }
-        readiness = status;
+    }
+}
+
+void Tree::setReadinessOnBranch(int status){
+    setReadiness(status);
+    for (int i = 0; i < branch.size(); i++){
+        branch[i] -> setReadinessOnBranch(status);
     }
 }
 
@@ -135,13 +143,13 @@ void Tree::deleteSubject(std::string name){
             if (branch[i] == subject) {
                 branch.erase(branch.begin() + i);
                 delete subject;
-                return;
+                break;
             }
         }
     }
 }
 
-Tree* Tree::getObject(std::string path){
+Tree* Tree::getObjectByPath(std::string path){
     if (path.empty()) {
         return nullptr;
     }
@@ -164,32 +172,18 @@ Tree* Tree::getObject(std::string path){
             return root -> getObjectOnTree(path);
         }
         path.erase(0, 1);
-        std::string curName{};
-        for (int i = 0; i < path.length(); i++) {
-            if (path[i] == '/') {
-                root = root -> getSubject(curName);
-                if (!root) return root;
-                curName = "";
-            } else {
-                curName += path[i];
-            }
-        }
-        root = root -> getSubject(curName);
-        return root;
-    } else {
-        std::string curName{};
-        for (int i = 0; i < path.length(); i++) {
-            if (path[i] == '/') {
-                root = root -> getSubject(curName);
-                if (!root) return root;
-                curName = "";
-            } else {
-                curName += path[i];
-            }
-        }
-        root = root -> getSubject(curName);
-        return root;
     }
+    std::string curName{};
+    for (int i = 0; i < path.length(); i++) {
+        if (path[i] == '/') {
+            root = root -> getSubject(curName);
+            if (!root) return root;
+            curName = "";
+        } else {
+            curName += path[i];
+        }
+    }
+    return root -> getSubject(curName);
 }
 
 bool Tree::changeHead(Tree* newHead){
@@ -212,4 +206,62 @@ bool Tree::changeHead(Tree* newHead){
     this -> head = newHead;
     newHead -> branch.push_back(this);
     return true;
+}
+
+void Tree::connect(Signal signal, Tree* target, Handler handler){
+    for (int i = 0; i < connections.size(); i++){
+
+        if (connections[i]->signal == signal &&
+            connections[i]->target == target &&
+            connections[i]->handler == handler)
+        {
+            return;
+        }
+    }
+    connections.push_back(new Connection(signal, target, handler));
+}
+
+void Tree::disconnect(Signal signal, Tree* target, Handler handler){
+    for (int i = 0; i < connections.size(); i++){
+
+        if (connections[i]->signal == signal &&
+            connections[i]->target == target &&
+            connections[i]->handler == handler)
+        {
+            connections.erase(connections.begin() + i);
+            return;
+        }
+    }
+}
+
+void Tree::emitSignal(Signal signal, std::string& message){
+    if (readiness == 0) return;
+
+    Handler handler;
+    Tree* target;
+
+    (this ->* signal) (message);
+
+    for (int i = 0; i < connections.size(); i++){
+        if (connections[i]->signal == signal){
+            handler = connections[i]->handler;
+            target = connections[i]->target;
+            if (target->readiness != 0){
+                (target ->* handler) (message);
+            }
+        }
+    }
+}
+
+std::string Tree::getAbsolutePath(){
+    Tree* curHead = this->getHead();
+    if (!curHead) {
+        return "/";
+    }
+    std::string absolutePath = '/' + getName();
+    while (curHead -> getHead()){
+        absolutePath = '/' + curHead->getName() + absolutePath;
+        curHead = curHead -> getHead();
+    }
+    return absolutePath;
 }

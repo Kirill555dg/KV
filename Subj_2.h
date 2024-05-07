@@ -5,6 +5,8 @@
 class Subj_2 : public Tree {
 public:
     Subj_2(Tree* tree, std::string name = "subj_2");
+    void signalRun(std::string& message);
+    void handlerRun(std::string message);
 };
 
 #endif
