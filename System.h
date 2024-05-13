@@ -33,7 +33,7 @@ public:
     void signalForLiftStatus(std::string& message);
 
     void handlerTurnOff(std::string message);
-    void handlerShowtree(std::string message);
+    void handlerShowTree(std::string message);
 };
 
 #endif

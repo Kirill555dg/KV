@@ -33,7 +33,7 @@ void Lift::signalForFloorsStatus(std::string& message){}
 
 void Lift::handlerCondition(std::string message){
     message = "Elevator condition: " + std::to_string(currentFloor) + " " + std::to_string(currentFullness);
-    if (direction == 0) {
+    if (direction == 0 || direction == 2) {
         message += " stop\n";
     } else {
         message += " direction ";
@@ -78,13 +78,17 @@ void Lift::handlerToRemovePassenger(std::string message){
 }
 
 void Lift::handlerChangeDirection(std::string message){
-    int num = std::stoi(message);
-    if (num > 0) {
-        direction = 1;
-    } else if (num < 0) {
-        direction = -1;
+    if (message == "-") {
+        direction = 2;
     } else {
-        direction = 0;
+        int num = std::stoi(message);
+        if (num > 0) {
+            direction = 1;
+        } else if (num < 0) {
+            direction = -1;
+        } else {
+            direction = 0;
+        }
     }
 }
 

@@ -6,7 +6,7 @@ const std::string liftName = "lift_object";
 
 class Lift : public Tree {
     int capacity;
-    int direction = 0; // -1: down, 0: stop, 1: up
+    int direction = 0; // -1: down, 0: stop, 1: up, 2: stop before moving
     int currentFloor = 1;
     int currentFullness = 0;
 public:

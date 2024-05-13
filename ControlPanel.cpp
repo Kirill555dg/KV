@@ -25,7 +25,7 @@ void ControlPanel::handlerTact(std::string message){
         if (query.empty()) return;
         int target = abs(query[0]);
         message = std::to_string(query[0]);
-        if (curDir == 0) { // Лифт стоит (либо достиг этажа первого пассажира, либо не начал движение)
+        if (curDir == 0 || curDir == 2) { // Лифт стоит (либо достиг этажа первого пассажира, либо ещё не начал движение)
             if (target == curFloor) { // Лифт достиг этажа первого пассажира
                 // Добавление первого пассажира
                 emitSignal(SIGNAL(ControlPanel::signalToAddPassenger), message);
@@ -66,10 +66,11 @@ void ControlPanel::handlerTact(std::string message){
                     i++;
                 }
             }
+
             if (!ending.empty()) { // Если лифт не пуст
-                message = std::to_string(ending[0]); // Движение к ближайшему этажу выхода
+                message = "-"; // Лифт поедет на следующем такте
             } else if (!query.empty()) { // Если есть запрос
-                message = std::to_string(abs(query[0])-curFloor); // Движение к новому первому пассажиру
+                message = "-"; // Лифт поедет на следующем такте
             } else { // Лифт стоит
                 message = "0";
             }
@@ -82,6 +83,7 @@ void ControlPanel::handlerTact(std::string message){
                 }
             }
             message = std::to_string(targetFloor);
+            if (curDir == 2) emitSignal(SIGNAL(ControlPanel::signalChangeDirection), message);
             emitSignal(SIGNAL(ControlPanel::signalLiftMove), message);
         }
     }

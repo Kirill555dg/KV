@@ -72,8 +72,7 @@ void System::handlerPassengerCondition(std::string message){
     } else {
         Passenger* passenger = (Passenger*) object;
         outputMessage += "condition: " + message;
-        Tree* head = passenger -> getHead();
-        if (head->num == 5) {
+        if (passenger -> getHead()->num == 5) {
             outputMessage += " in the elevator\n";
         } else {
             outputMessage += " on the floor " + std::to_string(passenger->getStart()) + '\n';
@@ -97,13 +96,12 @@ void System::handlerNewPassenger(std::string message){
         Floor* floor = (Floor*) branch[i];
         if (floor->getLevel() == start) {
             Passenger* passenger = new Passenger(floor, start, end, tact, fullname);
-            int direction = passenger->getDirection();
-            if (direction == 1) {
+            if (passenger->getDirection() == 1) {
                 floor -> emitSignal(SIGNAL(Floor::signalButtonUp), message);
             } else {
                 floor -> emitSignal(SIGNAL(Floor::signalButtonDown), message);
             }
-            break;
+            return;
         }
     }
 }
@@ -123,7 +121,7 @@ void System::handlerTurnOff(std::string message){
     emitSignal(SIGNAL(System::signalOutput), message);
 }
 
-void System::handlerShowtree(std::string message){
+void System::handlerShowTree(std::string message){
     isRunning = false;
     printReadiness();
 }
@@ -145,7 +143,7 @@ void System::build_tree_objects(){
 
     this -> connect(SIGNAL(System::signalToGetCommand), input, HANDLER(InputObject::handlerCommandInput));
     input -> connect(SIGNAL(InputObject::signalTurnOff), this, HANDLER(System::handlerTurnOff));
-    input -> connect(SIGNAL(InputObject::signalShowtree), this, HANDLER(System::handlerShowtree));
+    input -> connect(SIGNAL(InputObject::signalShowtree), this, HANDLER(System::handlerShowTree));
     input -> connect(SIGNAL(InputObject::signalSystemStatus), this, HANDLER(System::handlerSystemStatus));
     input -> connect(SIGNAL(InputObject::signalPassengerCondition), this, HANDLER(System::handlerPassengerCondition));
     input -> connect(SIGNAL(InputObject::signalNewPassenger), this, HANDLER(System::handlerNewPassenger));
@@ -158,12 +156,12 @@ void System::build_tree_objects(){
 
 int System::exec_app() {
     std::string command{};
-    this -> emitSignal(SIGNAL(System::signalToGetCommand), command);
+    emitSignal(SIGNAL(System::signalToGetCommand), command);
     while (isRunning) {
-        std::string message = "";
-        this -> emitSignal(SIGNAL(System::signalTact), message);
+        std::string message{};
+        emitSignal(SIGNAL(System::signalTact), message);
         tact++;
-        this -> emitSignal(SIGNAL(System::signalToGetCommand), command);
+        emitSignal(SIGNAL(System::signalToGetCommand), command);
     }
     return 0;
 }
